@@ -20,6 +20,7 @@ lst <-
 	  ff=c(13,14,15,16),
 	  gg=c(17,18,19))))
 
+#depth of list
 list.depth <- function(this, thisdepth = 0) {
 	  if(!is.list(this)) {
 		return(thisdepth)
@@ -29,6 +30,17 @@ list.depth <- function(this, thisdepth = 0) {
 }
 list.depth(lst)
 
+################################################################################
+#
+#	lists not assuming equal depth for all levels
+#
+################################################################################
+
+#http://stackoverflow.com/questions/13432863/determine-level-of-nesting-in-r
+depth <- function(this) ifelse(is.list(this), 1L + max(sapply(this, depth)), 0L)
+depth(lst)
+
+#total amount of elements for a flattened list
 flat.list.length <- 
 	function(this) {
 	  if(!is.list(this)) {
@@ -38,6 +50,4 @@ flat.list.length <-
 	  }
 }
 flat.list.length(lst)
-
-
 
